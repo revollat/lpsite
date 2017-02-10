@@ -1,15 +1,14 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once "init.php";
 
-$app = new Silex\Application();
-$app['debug'] = true;
-
-$app->get('/', function () {
-    return 'Page accueil';
+$app->get('/', function () use ($app)  {
+        return $app['twig']->render('accueil.html.twig');
 });
 
 $app->get('/hello/{name}', function ($name) use ($app) {
-    return 'Hello '.$app->escape($name);
+    return $app['twig']->render('hello.html.twig', array(
+        'name' => $name,
+    ));
 });
 
 $app->run();
