@@ -1,8 +1,15 @@
 <?php
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
-$twig = new Twig_Environment($loader);
+$app = new Silex\Application();
+$app['debug'] = true;
 
-echo $twig->render('index.html.twig', array('unevariable' => 'Hello', 'uneautrevariable' => 'world'));
+$app->get('/', function () {
+    return 'Page accueil';
+});
+
+$app->get('/hello/{name}', function ($name) use ($app) {
+    return 'Hello '.$app->escape($name);
+});
+
+$app->run();
