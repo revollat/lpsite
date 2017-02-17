@@ -1,6 +1,9 @@
 <?php
 require_once "init.php";
 
+use Symfony\Component\HttpFoundation\Request;
+use Lpimash\Form\Contact;
+
 //  ==================== ACCUEIL =====================
 $app->get('/', function () use ($app)  {
         return $app['twig']->render('pages/accueil.html.twig');
@@ -23,6 +26,22 @@ $app->get('/livre/{id}', function ($id) use ($app) {
     return $app['twig']->render('pages/livre.html.twig', array(
         'livre' => $livre
     ));
+    
+});
+
+// Contact
+$app->match('/me-contacter', function (Request $request) use ($app) {
+    
+    $form = $app['form.factory']->createBuilder(Contact::class)->getForm();
+    
+    $form->handleRequest($request);
+    if ($form->isValid()) {
+        $form_data = $form->getData();
+        $app['session']->getFlashBag()->add('message', 'Votre message a bien été envoyé. Vous serez recontacté sur ' . $form_data['email']);
+        return $app->redirect('/site/');
+    }
+        
+    return $app['twig']->render('pages/contact.html.twig', array('form' => $form->createView()));
     
 });
 

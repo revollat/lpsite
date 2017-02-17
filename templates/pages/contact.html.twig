@@ -1,0 +1,11 @@
+{% extends "layout.html.twig" %}
+
+{% form_theme form 'theme/bootstrap_3_layout.html.twig' %}
+
+{% block contenu %}
+    
+    <h1>contact</h1>
+    
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }} 
+    
+{% endblock %}
