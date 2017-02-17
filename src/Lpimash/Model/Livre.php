@@ -15,4 +15,8 @@ class Livre {
         return $this->db->executeQuery("SELECT * FROM livres WHERE id = ?", array($id))->fetch();
     }
     
+    public function getCommentairesForId($id){
+        return $this->db->fetchAll("SELECT * FROM commentaires WHERE livre_id = ?", array($id));
+    }
+    
 }

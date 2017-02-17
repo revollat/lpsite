@@ -22,9 +22,11 @@ $app->get('/livres', function () use ($app) {
 $app->get('/livre/{id}', function ($id) use ($app) {
     
     $livre = $app['livres']->getById($id);
+    $commentaires = $app['livres']->getCommentairesForId($id);
     
     return $app['twig']->render('pages/livre.html.twig', array(
-        'livre' => $livre
+        'livre' => $livre,
+        'commentaires' => $commentaires
     ));
     
 });
