@@ -1,14 +1,19 @@
 <?php
 require_once "init.php";
 
+//  ==================== ACCUEIL =====================
 $app->get('/', function () use ($app)  {
         return $app['twig']->render('pages/accueil.html.twig');
 });
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return $app['twig']->render('pages/hello.html.twig', array(
-        'name' => $name,
+//  ==================== LIVRES ======================
+$app->get('/livres', function () use ($app) {
+    
+    return $app['twig']->render('pages/livres.html.twig', array(
+        'livres' => $app['livres']->getItems()
     ));
-})->value('name', 'World');
+    
+});
+
 
 $app->run();
