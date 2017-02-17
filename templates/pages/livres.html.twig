@@ -4,7 +4,7 @@
 
   <ul>
   {% for livre in livres %}
-    <li>{{ livre.titre }}</li>  
+    <li><a href="/site/livre/{{ livre.id }}">{{ livre.titre }}</a></li>  
   {% endfor %}
   </ul>
   

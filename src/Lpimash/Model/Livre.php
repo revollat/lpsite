@@ -11,5 +11,8 @@ class Livre {
         return $this->db->fetchAll('SELECT * FROM livres');
     }
     
+    public function getById($id){
+        return $this->db->executeQuery("SELECT * FROM livres WHERE id = ?", array($id))->fetch();
+    }
     
 }
